@@ -1,7 +1,6 @@
 if (!('webkitSpeechRecognition' in window)) {
   upgrade();
 } else {
-  //document.getElementById("start_button").style.display = 'inline-block';
   var recognition = new webkitSpeechRecognition();
   var recognizing = false;
   recognition.continuous = true;
@@ -15,12 +14,10 @@ if (!('webkitSpeechRecognition' in window)) {
 
   recognition.onerror = function(event) {
     if (event.error == 'no-speech') {
-      //start_img.src = '/intl/en/chrome/assets/common/images/content/mic.gif';
       console.log('info_no_speech');
       ignore_onend = true;
     }
     if (event.error == 'audio-capture') {
-      //start_img.src = '/intl/en/chrome/assets/common/images/content/mic.gif';
       console.log('info_no_microphone');
       ignore_onend = true;
     }
@@ -50,12 +47,10 @@ if (!('webkitSpeechRecognition' in window)) {
       if (event.results[i].isFinal) {
         final_transcript = capitalize(event.results[i][0].transcript +=". ");
 
-          //recognition.stop();
-          interim_span.innerHTML = final_transcript;
-          sendToGpt(final_transcript);
-          return;
-          //speech.text = final_transcript;
-          //window.speechSynthesis.speak(speech);
+        interim_span.innerHTML = final_transcript;
+        sendToGpt(final_transcript);
+        return;
+          
       } else {
         interim_transcript += event.results[i][0].transcript;
       }
